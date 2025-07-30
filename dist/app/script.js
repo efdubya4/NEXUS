@@ -5,7 +5,7 @@ class NexusAI {
         this.currentAgent = 'guardian';
         // Use production API URL for deployed version
         this.apiBaseUrl = window.location.hostname === 'nexus-agent.io' 
-            ? 'https://api.nexus-agent.io/api/nexus'
+            ? 'https://nexus-agent-production.up.railway.app/api/nexus'
             : 'http://localhost:5001/api/nexus';
         this.agents = {
             guardian: { name: 'NEXUS Guardian', icon: '🛡️', description: 'Primary interface agent for user interaction and query preprocessing' },

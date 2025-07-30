@@ -36,10 +36,7 @@ jobs:
         publish_dir: ./docs
         destination_dir: docs
         cname: nexus-agent.org
-        
-    - name: Configure custom domain
-      run: |
-        echo "nexus-agent.org" > docs/CNAME
+        force_orphan: true
         
     - name: Deploy to production
       if: github.ref == 'refs/heads/main'
