@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS AI - Neural Expert eXchange & Unified Specialization System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">N</div>
+                    <span class="logo-text">NEXUS AI</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3 class="nav-title">Core Agents</h3>
+                    <ul class="nav-list">
+                        <li class="nav-item active" data-agent="guardian">
+                            <span class="nav-icon">🛡️</span>
+                            <span class="nav-label">NEXUS Guardian</span>
+                        </li>
+                        <li class="nav-item" data-agent="navigator">
+                            <span class="nav-icon">🧭</span>
+                            <span class="nav-label">NEXUS Navigator</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <h3 class="nav-title">Specialists</h3>
+                    <ul class="nav-list">
+                        <li class="nav-item" data-agent="builder">
+                            <span class="nav-icon">🏗️</span>
+                            <span class="nav-label">NEXUS Builder</span>
+                        </li>
+                        <li class="nav-item" data-agent="coder">
+                            <span class="nav-icon">💻</span>
+                            <span class="nav-label">NEXUS Coder</span>
+                        </li>
+                        <li class="nav-item" data-agent="gardener">
+                            <span class="nav-icon">🌱</span>
+                            <span class="nav-label">NEXUS Gardener</span>
+                        </li>
+                        <li class="nav-item" data-agent="teacher">
+                            <span class="nav-icon">📚</span>
+                            <span class="nav-label">NEXUS Teacher</span>
+                        </li>
+                        <li class="nav-item" data-agent="chef">
+                            <span class="nav-icon">👨‍🍳</span>
+                            <span class="nav-label">NEXUS Chef</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <h3 class="nav-title">System</h3>
+                    <ul class="nav-list">
+                        <li class="nav-item" data-agent="monitor">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-label">NEXUS Monitor</span>
+                        </li>
+                        <li class="nav-item" data-agent="learner">
+                            <span class="nav-icon">🧠</span>
+                            <span class="nav-label">NEXUS Learner</span>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <div class="status-indicator online"></div>
+                    <span class="status-text">System Online</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <h1 class="page-title">NEXUS Guardian</h1>
+                    <p class="page-subtitle">Primary Interface Agent</p>
+                </div>
+                <div class="header-right">
+                    <div class="efficiency-score">
+                        <span class="score-label">Efficiency Score</span>
+                        <span class="score-value">94.2%</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Chat Interface -->
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Welcome message -->
+                    <div class="message system-message">
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="agent-name">NEXUS Guardian</span>
+                                <span class="message-time">Just now</span>
+                            </div>
+                            <div class="message-text">
+                                Welcome to NEXUS AI! I'm your primary interface agent. I can help you with any query by routing it to the most appropriate specialist. What would you like to know?
+                            </div>
+                            <div class="message-meta">
+                                <span class="routing-info">Routing: Direct</span>
+                                <span class="response-time">Response: 45ms</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="chat-input-container">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="messageInput" 
+                            class="message-input" 
+                            placeholder="Ask NEXUS AI anything..."
+                            rows="1"
+                        ></textarea>
+                        <button id="sendButton" class="send-button">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="input-footer">
+                        <span class="input-hint">Press Enter to send, Shift+Enter for new line</span>
+                        <div class="agent-indicator">
+                            <span class="indicator-label">Active Agent:</span>
+                            <span class="indicator-value">NEXUS Guardian</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar - Agent Details -->
+        <aside class="agent-sidebar">
+            <div class="agent-header">
+                <h3 class="agent-title">Agent Details</h3>
+            </div>
+            
+            <div class="agent-info">
+                <div class="info-section">
+                    <h4 class="info-title">Current Agent</h4>
+                    <div class="agent-card">
+                        <div class="agent-icon">🛡️</div>
+                        <div class="agent-details">
+                            <h5 class="agent-name">NEXUS Guardian</h5>
+                            <p class="agent-description">Primary interface agent for user interaction and query preprocessing</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-section">
+                    <h4 class="info-title">Performance Metrics</h4>
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <span class="metric-label">Response Time</span>
+                            <span class="metric-value">45ms</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Accuracy</span>
+                            <span class="metric-value">94.2%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Efficiency</span>
+                            <span class="metric-value">89.7%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-section">
+                    <h4 class="info-title">System Status</h4>
+                    <div class="status-list">
+                        <div class="status-item">
+                            <span class="status-dot online"></span>
+                            <span class="status-text">NEXUS Core</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-dot online"></span>
+                            <span class="status-text">NEXUS Router</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-dot online"></span>
+                            <span class="status-text">AICL Protocol</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
