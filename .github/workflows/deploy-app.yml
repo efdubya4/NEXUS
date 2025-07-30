@@ -1,0 +1,54 @@
+name: Deploy NEXUS AI App
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'app/**', 'shared/**' ]
+  workflow_dispatch:
+
+jobs:
+  deploy-app:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        npm install -g http-server
+        
+    - name: Build app
+      run: |
+        echo "Building NEXUS AI app..."
+        # Copy shared assets to app
+        cp -r shared/* app/ 2>/dev/null || true
+        
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./app
+        destination_dir: app
+        cname: nexus-agent.io
+        
+    - name: Configure custom domain
+      run: |
+        echo "nexus-agent.io" > app/CNAME
+        
+    - name: Deploy to production
+      if: github.ref == 'refs/heads/main'
+      run: |
+        echo "Deploying to nexus-agent.io..."
+        # Add any additional deployment steps here
+        
+    - name: Notify deployment
+      run: |
+        echo "✅ NEXUS AI app deployed to nexus-agent.io"
+        echo "🌐 App URL: https://nexus-agent.io" 

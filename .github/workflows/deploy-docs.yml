@@ -1,0 +1,54 @@
+name: Deploy NEXUS AI Documentation
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'docs/**', 'shared/**' ]
+  workflow_dispatch:
+
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        npm install -g http-server
+        
+    - name: Build documentation
+      run: |
+        echo "Building NEXUS AI documentation..."
+        # Copy shared assets to docs
+        cp -r shared/* docs/ 2>/dev/null || true
+        
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+        destination_dir: docs
+        cname: nexus-agent.org
+        
+    - name: Configure custom domain
+      run: |
+        echo "nexus-agent.org" > docs/CNAME
+        
+    - name: Deploy to production
+      if: github.ref == 'refs/heads/main'
+      run: |
+        echo "Deploying to nexus-agent.org..."
+        # Add any additional deployment steps here
+        
+    - name: Notify deployment
+      run: |
+        echo "✅ NEXUS AI documentation deployed to nexus-agent.org"
+        echo "📚 Docs URL: https://nexus-agent.org" 
