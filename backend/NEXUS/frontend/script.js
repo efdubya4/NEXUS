@@ -3,10 +3,6 @@
 class NexusAI {
     constructor() {
         this.currentAgent = 'guardian';
-        // Use production API URL for deployed version
-        this.apiBaseUrl = window.location.hostname === 'nexus-agent.io' 
-            ? 'https://nexus-agent-production.up.railway.app/api/nexus'
-            : 'http://localhost:5001/api/nexus';
         this.agents = {
             guardian: { name: 'NEXUS Guardian', icon: '🛡️', description: 'Primary interface agent for user interaction and query preprocessing' },
             navigator: { name: 'NEXUS Navigator', icon: '🧭', description: 'Query routing and orchestration specialist' },
@@ -26,36 +22,6 @@ class NexusAI {
         this.bindEvents();
         this.setupAutoResize();
         this.updateAgentInfo();
-        this.checkBackendStatus();
-    }
-
-    async checkBackendStatus() {
-        try {
-            const response = await fetch(`${this.apiBaseUrl}/status`);
-            if (response.ok) {
-                const data = await response.json();
-                console.log('Backend status:', data);
-                this.updateSystemStatus('online');
-            } else {
-                this.updateSystemStatus('offline');
-            }
-        } catch (error) {
-            console.log('Backend not available, using simulated responses');
-            this.updateSystemStatus('offline');
-        }
-    }
-
-    updateSystemStatus(status) {
-        const statusIndicator = document.querySelector('.status-indicator');
-        const statusText = document.querySelector('.status-text');
-        
-        if (status === 'online') {
-            statusIndicator.className = 'status-indicator online';
-            statusText.textContent = 'System Online';
-        } else {
-            statusIndicator.className = 'status-indicator offline';
-            statusText.textContent = 'System Offline (Simulated)';
-        }
     }
 
     bindEvents() {
@@ -150,7 +116,7 @@ class NexusAI {
         metrics[2].textContent = `${efficiency}%`;
     }
 
-    async sendMessage() {
+    sendMessage() {
         const messageInput = document.getElementById('messageInput');
         const message = messageInput.value.trim();
         
@@ -163,55 +129,8 @@ class NexusAI {
         messageInput.value = '';
         this.autoResizeTextarea(messageInput);
 
-        // Process message through backend or simulate response
-        await this.processMessage(message);
-    }
-
-    async processMessage(message) {
-        try {
-            // Try to use backend API
-            const response = await fetch(`${this.apiBaseUrl}/query`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    message: message,
-                    context: {
-                        current_agent: this.currentAgent
-                    }
-                })
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                this.handleBackendResponse(data, message);
-            } else {
-                // Fallback to simulated response
-                this.simulateAIResponse(message);
-            }
-        } catch (error) {
-            console.log('Backend not available, using simulated response');
-            this.simulateAIResponse(message);
-        }
-    }
-
-    handleBackendResponse(data, originalMessage) {
-        const response = data.response;
-        const routing = data.routing;
-        const metrics = data.metrics;
-        
-        let routingInfo = null;
-        if (routing && routing.domain !== 'general') {
-            routingInfo = `Routed to NEXUS ${routing.domain.charAt(0).toUpperCase() + routing.domain.slice(1)}`;
-        }
-        
-        const responseTime = metrics ? metrics.response_time_ms : Math.floor(Math.random() * 200) + 50;
-        
-        setTimeout(() => {
-            this.addSystemMessage(response, routingInfo, responseTime);
-            this.updateMetrics();
-        }, 500);
+        // Simulate AI response
+        this.simulateAIResponse(message);
     }
 
     addUserMessage(message) {

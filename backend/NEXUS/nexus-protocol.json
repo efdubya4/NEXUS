@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AICL Message Format",
+  "type": "object",
+  "properties": {
+    "aicl_version": {"type": "string"},
+    "message_id": {"type": "string"},
+    "timestamp": {"type": "string"},
+    "sender": {
+      "type": "object",
+      "properties": {
+        "agent_id": {"type": "string"},
+        "agent_type": {"type": "string"},
+        "capabilities": {"type": "array", "items": {"type": "string"}}
+      },
+      "required": ["agent_id", "agent_type", "capabilities"]
+    },
+    "recipient": {
+      "type": "object",
+      "properties": {
+        "agent_id": {"type": "string"},
+        "agent_type": {"type": "string"},
+        "domain": {"type": "string"}
+      },
+      "required": ["agent_id", "agent_type", "domain"]
+    },
+    "message_type": {"type": "string"},
+    "session_id": {"type": "string"},
+    "context": {"type": "object"},
+    "payload": {"type": "object"},
+    "metadata": {"type": "object"}
+  },
+  "required": ["aicl_version", "message_id", "timestamp", "sender", "recipient", "message_type", "session_id", "context", "payload", "metadata"]
+} 
